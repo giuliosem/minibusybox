@@ -11,7 +11,7 @@ void usage() {
     printf("Example: chown 1000 1000 /usr/bin/code\n");
 }
 
-int chown_cmd(int argc, char **argv) {
+int my_chown(int argc, char **argv) {
     if (argc != 4) {
         usage();
         return -1;
@@ -34,5 +34,6 @@ int chown_cmd(int argc, char **argv) {
         return -1;
     } 
     printf("Success\n");
+    
     return 0;
 }
