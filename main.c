@@ -49,7 +49,7 @@ char *menu(int *argc, char** argv) {
     return parsecmd(argc, argv);
 }
 
-char * parsecmd(int *argc, char** argv) {
+char *parsecmd(int *argc, char** argv) {
     char *str = malloc(sizeof(char)*1024);
     fgets(str, 1024, stdin);
     const char s[3] = " \n";
