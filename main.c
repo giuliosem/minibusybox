@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include "chown/chown.h"
 #include "chmod/chmod.h"
+#include "uname/uname.h"
 
 int execute(int argc, char**);
 char *parsecmd(int *argc, char**);
@@ -13,6 +14,7 @@ typedef struct command_t {const char* name; int (*fncptr)(int, char **);} comman
 command_t commands[] = {
     {"chown", my_chown},
     {"chmod", my_chmod}
+    {"uname", my_uname}
 };
 
 int main() {
