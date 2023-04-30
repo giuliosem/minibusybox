@@ -5,6 +5,7 @@
 #include "chown/chown.h"
 #include "chmod/chmod.h"
 #include "uname/uname.h"
+#include "cat/cat.h"
 
 int execute(int argc, char**);
 char *parsecmd(int *argc, char**);
@@ -13,8 +14,9 @@ char *menu(int *argc, char**);
 typedef struct command_t {const char* name; int (*fncptr)(int, char **);} command_t;
 command_t commands[] = {
     {"chown", my_chown},
-    {"chmod", my_chmod}
-    {"uname", my_uname}
+    {"chmod", my_chmod},
+    {"uname", my_uname},
+    {"cat", my_cat}
 };
 
 int main() {
@@ -45,7 +47,7 @@ char *menu(int *argc, char** argv) {
     printf("*chmod\n");
     printf("*uname\n");
     printf("*chown\n");
-    printf("*other\n");
+    printf("*cat\n");
     printf("\n");
     printf("command> ");
     return parsecmd(argc, argv);
