@@ -7,7 +7,7 @@
 #include <sys/utsname.h>
 #include <regex.h>
 
-int my_chmod(char *argv[]){
+int my_chmod(int argc, char *argv[]){
     // Compile the regex
     regex_t regex;
     int status = regcomp(&regex, "[ugoa]*([-+=]([rwxXst]*|[ugo]))+|[-+=]*[0-7]", REG_EXTENDED);
