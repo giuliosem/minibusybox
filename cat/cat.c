@@ -26,7 +26,7 @@ int my_cat(int argc_s, char *argv_s[]){
 	    	printf("Warning: Only the first PATH will be printed\n\n"); 
 	    	flagError = 1;    	
 	}    
-	file_desc = open(argv_s[0], O_RDONLY);
+	file_desc = open(argv_s[1], O_RDONLY);
 	if (file_desc < 0) {
 		printf("Error opening file"); /////////// importante
 		return(1);
