@@ -1,23 +1,40 @@
-CROSS_COMPILER = arm-linux-gnueabihf-
-CC = gcc
+#CC= arm-linux-gnueabihf-gcc
+CROSS_COMPILER=
+CC=gcc
+PREFIX =/usr/local/bin
 
-CFLAGS = -Wall
+PATH_CHOWN =./chown/
+PATH_CAT =./cat/
+PATH_CHMOD =./chmod/
+PATH_UNAME =./uname/
 
-.PHONY: all clean
+OBJ =$(PATH_CHOWN)chown.o $(PATH_CAT)cat.o $(PATH_CHMOD)chmod.o $(PATH_UNAME)uname.o main.o
 
-all:Make_cat Test
+.PHONY =all clean install uninstall
 
+all: makes_commads minibusybox
 
-Make_cat:
-	cd ./ComandoCat/ && make
+makes_commads:
+	@cd $(PATH_CHOWN) && make all
+	@cd $(PATH_CAT) && make all
+	@cd $(PATH_CHMOD)&& make all
+	@cd $(PATH_UNAME) && make all
 
-Test: Test.o ./ComandoCat/cat.o
-	$(CROSS_COMPILER)$(CC) $(CFLAGS) Test.o ./ComandoCat/cat.o -o Test
+minibusybox: $(OBJ)
+	$(CROSS_COMPILER)$(CC) $(OBJ) -o minibusybox 
 
-Test.o: Test.c
-	$(CROSS_COMPILER)$(CC) $(CFLAGS) -c Test.c -o Test.o
+main.o: main.c 
+	$(CROSS_COMPILER)$(CC) -c main.c
 
 clean:
-	rm -rf Test Test.o 
-	cd ./ComandoCat/ && make clean
+	rm -f *.o minibusybox
+	@cd $(PATH_CAT) && make clean
+	@cd $(PATH_CHOWN) && make clean
+	@cd $(PATH_CHMOD) && make clean
+	@cd $(PATH_UNAME) && make clean
+
+install: 
+	scp minibusybox debian@192.168.7.2:/home/debian
+
+uninstall:
 
