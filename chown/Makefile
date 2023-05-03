@@ -1,12 +1,21 @@
-CROSS_COMPILER = 
+CROSS_COMPILER =
 CC =gcc
 CFLAGS= -Wall
+LDFLAGS = -fPIC
+
+LIB = chown
+SHLIB_NAME = lib$(LIB).so
 
 .PHONY: all clean
 
-all:chown.o
+all: $(SHLIB_NAME)
 
-chown.o: chown.c chown.h
-	$(CROSS_COMPILER)$(CC) $(CFLAGS) -c chown.c -o chown.o
+$(SHLIB_NAME): $(LIB).o
+	$(CROSS_COMPILER)$(CC) $(LDFLAGS) -shared $< -o ../lib/$@
+
+$(LIB).o: $(LIB).c $(LIB).h 
+	$(CROSS_COMPILER)$(CC) $(CFLAGS) -c $< -o $@
+
 clean:
-	rm -rf chown.o
+	rm -rf *.o
+
